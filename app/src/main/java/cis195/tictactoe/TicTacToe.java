@@ -1,7 +1,9 @@
 package cis195.tictactoe;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +16,7 @@ public class TicTacToe extends AppCompatActivity {
 
     private boolean playerOne = true;
     private int numTurns;
-    private final String TURN = "'s turn";
+    private final String TURN = getString(R.string.append_turn);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,11 +105,25 @@ public class TicTacToe extends AppCompatActivity {
     public void winCondition() {
         String result = playerOne ? getIntent().getStringExtra("playerTwo") :
                 getIntent().getStringExtra("playerOne");
-        createDialog(result + " won!");
+        String loser = playerOne ? getIntent().getStringExtra("playerOne") :
+                getIntent().getStringExtra("playerTwo");
+        createDialog(result + getString(R.string.won));
+        SharedPreferences sharedPref = getSharedPreferences("LevelScores",
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(result, sharedPref.getInt(result, 0) + 1);
+        editor.putInt(loser, sharedPref.getInt(loser, 0));
     }
 
     public void drawCondition() {
-        createDialog("draw!");
+        createDialog(getString(R.string.draw));
+        SharedPreferences sharedPref = getSharedPreferences("LevelScores",
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(getIntent().getStringExtra("playerOne"),
+                sharedPref.getInt(getIntent().getStringExtra("playerOne"), 0));
+        editor.putInt(getIntent().getStringExtra("playerTwo"),
+                sharedPref.getInt(getIntent().getStringExtra("playerTwo"), 0));
     }
 
     public void createDialog(String condition) {

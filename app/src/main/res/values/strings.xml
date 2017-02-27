@@ -5,11 +5,15 @@
     <string name="player_one_name">Player One Name</string>
     <string name="player_two_name">Player Two Name</string>
     <string name="cont">Continue</string>
-    <string name="turn">\'s turn</string>
     <string-array name="end_options">
         <item>Play Again</item>
         <item>Leaderboard</item>
         <item>Quit</item>
     </string-array>
     <string name="title_activity_leaderboard">Leaderboard</string>
+    <string name="append_turn">\'s turn</string>
+    <string name="draw">draw!</string>
+    <string name="won">" won!"</string>
+    <string name="delete">Delete entries</string>
+    <string name="confidence">Are you sure you want to delete the entries?</string>
 </resources>

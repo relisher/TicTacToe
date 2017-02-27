@@ -13,4 +13,10 @@
     tools:context="cis195.tictactoe.Leaderboard"
     tools:showIn="@layout/activity_leaderboard">
 
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/Scores"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </RelativeLayout>

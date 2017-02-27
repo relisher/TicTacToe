@@ -18,5 +18,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void leaderView(View view) {
+        startActivity(new Intent(getBaseContext(), Leaderboard.class));
     }
 }
