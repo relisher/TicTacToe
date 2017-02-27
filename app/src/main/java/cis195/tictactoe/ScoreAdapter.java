@@ -5,10 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.TreeMap;
+import java.util.Map;
 
 /**
  * Created by arelin on 2/27/17.
@@ -16,10 +15,10 @@ import java.util.TreeMap;
 public class ScoreAdapter extends
         RecyclerView.Adapter<ScoreAdapter.ViewHolder> {
 
-    private TreeMap<String, ?> _scores;
+    private Map<String, ?> _scores;
     private Context _context;
 
-    public ScoreAdapter(Context context, TreeMap<String, ?> scores) {
+    public ScoreAdapter(Context context, Map<String, ?> scores) {
         _scores = scores;
         _context = context;
     }

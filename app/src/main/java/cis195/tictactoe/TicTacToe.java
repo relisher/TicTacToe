@@ -16,14 +16,15 @@ public class TicTacToe extends AppCompatActivity {
 
     private boolean playerOne = true;
     private int numTurns;
-    private final String TURN = getString(R.string.append_turn);
+    private String turn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tic_tac_toe);
         TextView text = (TextView) findViewById(R.id.textView);
-        text.setText(getIntent().getStringExtra("playerOne") + TURN);
+        turn = getString(R.string.append_turn);
+        text.setText(getIntent().getStringExtra("playerOne") + turn);
     }
 
     public void clickListen(View view) {
@@ -89,15 +90,15 @@ public class TicTacToe extends AppCompatActivity {
             }
         }
 
-        if(numTurns == 9) {
+        else if(numTurns == 9) {
             drawCondition();
         }
 
         if(playerOne) {
-            text.setText(getIntent().getStringExtra("playerOne") + TURN);
+            text.setText(getIntent().getStringExtra("playerOne") + turn);
         }
         else {
-            text.setText(getIntent().getStringExtra("playerTwo") + TURN);
+            text.setText(getIntent().getStringExtra("playerTwo") + turn);
         }
     }
 
@@ -113,6 +114,7 @@ public class TicTacToe extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(result, sharedPref.getInt(result, 0) + 1);
         editor.putInt(loser, sharedPref.getInt(loser, 0));
+        editor.commit();
     }
 
     public void drawCondition() {
@@ -124,6 +126,7 @@ public class TicTacToe extends AppCompatActivity {
                 sharedPref.getInt(getIntent().getStringExtra("playerOne"), 0));
         editor.putInt(getIntent().getStringExtra("playerTwo"),
                 sharedPref.getInt(getIntent().getStringExtra("playerTwo"), 0));
+        editor.commit();
     }
 
     public void createDialog(String condition) {
