@@ -1,10 +1,14 @@
 package cis195.tictactoe;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.TreeMap;
 
 /**
  * Created by arelin on 2/27/17.
@@ -12,23 +16,41 @@ import android.widget.TextView;
 public class ScoreAdapter extends
         RecyclerView.Adapter<ScoreAdapter.ViewHolder> {
 
+    private TreeMap<String, ?> _scores;
+    private Context _context;
+
+    public ScoreAdapter(Context context, TreeMap<String, ?> scores) {
+        _scores = scores;
+        _context = context;
+    }
+
+    private Context getContext() {
+        return _context;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.score_layout, parent, false);
+        return new ViewHolder(inflate);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        String scorer = (String) _scores.keySet().toArray()[position];
+        int score = (Integer) _scores.get(scorer);
+        TextView textView = holder.nameTextView;
+        textView.setText(scorer);
+        TextView scoreView = holder.scoreTextView;
+        scoreView.setText(Integer.toString(score));
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return _scores.size();
     }
 
-    // Provide a direct reference to each of the views within a data item
-    // Used to cache the views within the item layout for fast access
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView nameTextView;
